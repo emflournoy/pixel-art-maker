@@ -15,20 +15,16 @@ function getTileNum(number){
 }
 
 //Create paint circles
-var toolbar = document.getElementById('toolbar');
-for (var i = 0; i < 20; i++) {
+var paintBlobs = document.getElementById('paintBlobs');
+for (var i = 0; i < 40; i++) {
     var randomColor = getRandomColor()
     var blob = document.createElement('div');
     blob.classList.add('circle');
     blob.id = "paint" + [i]
     blob.style.backgroundColor = randomColor
-    toolbar.appendChild(blob);
+    paintBlobs.appendChild(blob);
 }
 
-//Add plank
-var wood = document.createElement('img');
-wood.id = "plank"
-toolbar.appendChild(wood);
 
 //putting colors on plank
 //////iterate through the different color blocks like you do for tiles. crop the plank so that it can just go through the row within that div
@@ -43,7 +39,7 @@ var colorManagement = {
 }
 
 //select user color on click
-toolbar.addEventListener("click", pickColor);
+paintBlobs.addEventListener("click", pickColor);
 
 //change background color for painting
 function pickColor(event){
