@@ -5,6 +5,7 @@ for (var i = 0; i < 1300; i++) {
     var tile = document.createElement('div');
     tile.classList.add('tile');
     tile.id = "tile" + [i]
+    tile.style.backgroundColor = 'white';
     grid.appendChild(tile);
 }
 
@@ -46,7 +47,13 @@ function pickColor(event){
   var pickUserColor = event.target.style.backgroundColor;
   // colorManagement.setUserColor(pickUserColor);
   colorManagement.userColor = pickUserColor;
+  //setting current color swatch
+  var currentSwatch = document.getElementById('currentSwatch');
+  currentSwatch.style.backgroundColor = colorManagement.userColor;
 }
+
+
+
 
 //tell tile to change color on click
 grid.addEventListener("click", paintSquare);
@@ -70,16 +77,7 @@ function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var fullColor = '#';
     for (var i = 0; i < 6; i++) {
-        fullColor += letters[Math.floor(Math.random() * 16)];
+        fullColor += letters[Math.floor(Math.random() * 15)];
     }
     return fullColor;
 }
-
-//
-// function colorDirections() {
-//     var letterStr = "Choose a color!"
-//     for (var c = 0; c < letterStr.length; c++) {
-//         var letter = letterStr[i]
-//         letter.style.color = randomColor;
-//     }
-// }
