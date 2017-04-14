@@ -9,11 +9,11 @@ for (var i = 0; i < 1300; i++) {
     grid.appendChild(tile);
 }
 
-//Getting tile ID
-function getTileNum(number){
-    var tileNum = number;
-    console.log(tileNum);
-}
+// //Getting tile ID
+// function getTileNum(number){
+//     var tileNum = number;
+//     console.log(tileNum);
+// }
 
 //Create paint circles
 var paintBlobs = document.getElementById('paintBlobs');
@@ -26,9 +26,6 @@ for (var i = 0; i < 40; i++) {
     paintBlobs.appendChild(blob);
 }
 
-
-//putting colors on plank
-//////iterate through the different color blocks like you do for tiles. crop the plank so that it can just go through the row within that div
 
 
 //get/set color
@@ -53,10 +50,23 @@ function pickColor(event){
 }
 
 
+//user picks a color with colorMaker
+var customColor = document.getElementById("userCustomColor");
+customColor.addEventListener("input", pickColor);
+customColor.addEventListener("change", watchColorPicker);
+
+function watchColorPicker(event) {
+    colorManagement.userColor = event.target.value;
+    var currentSwatch = document.getElementById('currentSwatch');
+    currentSwatch.style.backgroundColor = colorManagement.userColor
+}
 
 
 //tell tile to change color on click
 grid.addEventListener("click", paintSquare);
+grid.addEventListener("mousedown", mouseDown);
+grid.addEventListener("mouseup", mouseUp);
+grid.addEventListener("mouseover", mouseOver)
 
 
 //function to change square background
@@ -65,6 +75,30 @@ function paintSquare(event) {
     event.target.style.backgroundColor = selectedColor;
 }
 
+//Mouse up and down management
+var isMousedown = false;
+
+function mouseDown() {
+  isMousedown = true;
+}
+
+function mouseUp() {
+  isMousedown = false;
+}
+
+function mouseOver(event) {
+  if (isMousedown){
+    paintSquare(event);
+  }
+}
+
+//add mario music
+var audio = document.createElement("audio");
+audio.src="marioSong.mp3"
+grid.appendChild(audio);
+audio.loop = true;
+audio.play();
+
 
 //changing color of directions
 var directions = document.getElementById('directions');
@@ -72,6 +106,7 @@ console.log(directions);
 var randomColor = getRandomColor();
 
 directions.style.color = randomColor;
+colorMaker.style.color = randomColor;
 
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
